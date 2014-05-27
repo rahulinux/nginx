@@ -77,7 +77,7 @@ cmd wget https://github.com/openresty/redis2-nginx-module/archive/v0.11.tar.gz -
 cmd git clone https://github.com/agentzh/nginx-eval-module.git
 
 info "Extracting modules.."
-xargs -n1 tar -xzvf < <(echo *.tar.gz)
+echo *.tar.gz | xargs -n1 tar -xzvf
 
 info "Compiling nginx.."
 cmd cd nginx-1.4.1/
