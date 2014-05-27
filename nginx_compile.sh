@@ -135,4 +135,13 @@ info "Testing Nginx.."
 cmd "/usr/sbin/chroot ${chroot_dir} ${install_dir}/sbin/nginx -t"
 # /usr/sbin/chroot /nginx /opt/nginx/sbin/nginx
 
+info "Configuring Nginx Conf file"
+cmd sed -i "s/#user  nobody;/user $user/" ${chroot_dir}/conf/nginx.conf
+cmd sed -i '/include       mime.types;/a\    include       conf.d\/\*.conf;' ${chroot_dir}/conf/nginx.conf 
+cmd sed -i '/include       mime.types;/a\    underscores_in_headers on;' ${chroot_dir}/conf/nginx.conf 
 
+info "Installing INIT Script for Nginx"
+cmd "wget -O /etc/init.d/nginx https://raw.githubusercontent.com/rahulinux/scripts/master/nginx-chroot-init.sh"
+cmd chmod +x /etc/init.d/nginx 
+
+info "Process successfully completed"
