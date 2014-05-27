@@ -39,8 +39,11 @@ cmd(){
 	tput bold
 	tput setaf 4
 	echo "${@}"
-	sleep 1s 
-	eval "${@}"
+	sleep 1s
+	if [[ $1 != "-n" ]]
+	then 
+		eval "${@}"
+	fi
 	tput sgr 0 
 }
 
